@@ -1,14 +1,10 @@
 import { Route, Routes } from 'react-router-dom';
-import PageA from '../PageA';
-import PageB from '../PageB';
-import PageC from '../PageC';
+import Home from '../Home';
 
 export default function RoutesConfig() {
 	return (
 		<Routes>
-			<Route path="/A" element={<PageA />} />
-			<Route path="/B" element={<PageB />} />
-			<Route path="/C" element={<PageC />} />
+			<Route path="/" element={<Home />} />
 		</Routes>
 	);
 }

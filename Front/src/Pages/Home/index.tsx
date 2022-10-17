@@ -1,42 +1,33 @@
-import { useState } from 'react';
+import { LIST } from '../../Data';
+import { Csv } from '../Csv';
+import { Excel } from '../Excel';
 
 export default function Home() {
-	const [newItem, setNewItem] = useState('');
-	const [list, setList] = useState(['Bruno', 'Marcia']);
-
-	function addToList() {
-		setTimeout(() => {
-			setList(state => [...state, newItem]);
-		}, 500);
-	}
-
-	function removeFromList(itemRemove: string) {
-		setTimeout(() => {
-			setList(state => state.filter(item => item !== itemRemove));
-		}, 500);
-	}
 	return (
-		<div data-testid="Batata">
-			<input
-				type="text"
-				data-testid="inputNewItem"
-				placeholder="Novo Item"
-				value={newItem}
-				onChange={e => setNewItem(e.target.value)}
-			/>
-			<button type="button" onClick={addToList} className="bg-brand-500">
-				Adicionar
-			</button>
-			<ul>
-				{list.map(item => (
-					<li key={item}>
-						{item}
-						<button type="button" onClick={() => removeFromList(item)}>
-							Remover
-						</button>
-					</li>
-				))}
-			</ul>
+		<div className="m-auto max-w-7xl mt-4">
+			<h1>Converter Dados (Dados em Memória)</h1>
+			<div className="flex flex-row gap-3 m-4">
+				<Csv data={LIST} />
+				<Excel data={LIST} />
+			</div>
+			<table style={{ width: '100%' }}>
+				<thead>
+					<tr>
+						<th style={{ backgroundColor: 'red' }}>ID</th>
+						<th style={{ backgroundColor: 'green' }}>Name</th>
+						<th style={{ backgroundColor: 'gray' }}>Age</th>
+					</tr>
+				</thead>
+				<tbody>
+					{LIST.map(user => (
+						<tr key={user.id}>
+							<td>{user.id}</td>
+							<td>{user.name}</td>
+							<td>{user.age}</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
 		</div>
 	);
 }
